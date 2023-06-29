@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ pascal_triangle
     returns a nested list representing pascal's of n
 """
