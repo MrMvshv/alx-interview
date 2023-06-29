@@ -1,10 +1,12 @@
 #!/usr/bin/python3
-""" pascal_triangle
-    returns a nested list representing pascal's of n
+"""
+pascal_triangle
+returns a nested list representing pascal's of n
 """
 
 
 def pascal_triangle(n):
+    """ returns a pascal triangle nested list"""
     pascal = []
     x = 0
 
