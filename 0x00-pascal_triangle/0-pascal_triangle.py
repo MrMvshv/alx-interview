@@ -2,13 +2,15 @@
 """ pascal_triangle
     returns a nested list representing pascal's of n
 """
+
+
 def pascal_triangle(n):
     pascal = []
     x = 0
 
     if n <= 0:
         return pascal
-    
+
     while (n > x):
         if x == 0:
             pascal.append([1])
