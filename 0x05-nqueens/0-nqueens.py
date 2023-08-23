@@ -15,7 +15,7 @@ def chessputer(N):
     """computes options"""
     def backtrack(row):
         if row == N:
-            solutions.append(list(enumerate(board)))
+            solutions.append(list(enumerate(board.copy())))
             return
 
         for col in range(N):
