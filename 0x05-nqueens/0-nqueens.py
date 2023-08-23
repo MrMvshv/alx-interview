@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""N queens puzzle"""
 import sys
-
 
 def is_safe(board, row, col, N):
     """Check if there is a queen in the same column on any previous rows"""
@@ -9,7 +7,6 @@ def is_safe(board, row, col, N):
         if board[i] == col or abs(board[i] - col) == abs(i - row):
             return False
     return True
-
 
 def chessputer(N):
     """computes options"""
@@ -28,13 +25,9 @@ def chessputer(N):
     backtrack(0)
     return solutions
 
-
 def printA(option):
     """prints it"""
-    for row in option:
-        print(f"[{row[0]}, {row[1]}]", end=" ")
-    print()
-
+    print(" ".join([f"[{row[0]}, {row[1]}]" for row in option]), end='')
 
 def start():
     """entry point of program"""
@@ -54,9 +47,10 @@ def start():
 
     options = chessputer(N)
     for option in options:
+        print("[", end='')
         printA(option)
+        print("]", end='')
         print()
-
 
 if __name__ == "__main__":
     start()
