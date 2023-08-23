@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 import sys
 
+
 def is_safe(board, row, col, N):
     """Check if there is a queen in the same column on any previous rows"""
     for i in range(row):
         if board[i] == col or abs(board[i] - col) == abs(i - row):
             return False
     return True
+
 
 def chessputer(N):
     """computes options"""
@@ -25,9 +27,11 @@ def chessputer(N):
     backtrack(0)
     return solutions
 
+
 def printA(option):
     """prints it"""
     print(" ".join([f"[{row[0]}, {row[1]}]" for row in option]), end='')
+
 
 def start():
     """entry point of program"""
@@ -51,6 +55,7 @@ def start():
         printA(option)
         print("]", end='')
         print()
+
 
 if __name__ == "__main__":
     start()
