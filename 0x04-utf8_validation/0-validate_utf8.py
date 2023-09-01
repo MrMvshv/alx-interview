@@ -1,42 +1,35 @@
 #!/usr/bin/python3
-"""
-method that determines if data set
-represents  valid UTF-8 encoding.
-"""
-
-
-def isByteStart(num):
-    """ function to check if a number is a valid utf-8 start byte"""
-    return (num & 0b10000000) == 0b00000000
-
-
-def isByteContinue(num):
-    """ function to check if a number is a valid utf-8 continuation byte"""
-    return (num & 0b11000000) == 0b10000000
+"""UTF-8 Validation"""
 
 
 def validUTF8(data):
-    """checks if is valid utf-8"""
-    i = 0
+    """method that determines if a given
+    data set represents a valid UTF-8 encoding"""
+    def is_continuation(byte):
+        return byte & 0b11000000 == 0b10000000
 
-    while i < len(data):
-        numOfBytes = 0
-
-        if isByteStart(data[i]):
-            if (data[i] & 0b11110000) == 0b11110000:
-                numOfBytes = 4
-            elif (data[i] & 0b11100000) == 0b11000000:
-                numOfBytes = 3
-            elif (data[i] & 0b11000000) == 0b10000000:
-                numOfBytes = 2
-            else:
-                numOfBytes = 1
+    def num_following_bytes(byte):
+        if byte & 0b11100000 == 0b11000000:
+            return 1
+        elif byte & 0b11110000 == 0b11100000:
+            return 2
+        elif byte & 0b11111000 == 0b11110000:
+            return 3
         else:
-            return False
+            return 0
 
-        for j in range(1, numOfBytes):
-            if i + j >= len(data) or not isByteContinue(data[i + j]):
+    num_bytes_to_follow = 0
+
+    for byte in data:
+        if num_bytes_to_follow == 0:
+            if byte & 0b10000000 == 0:  # 1-byte character
+                continue
+            num_bytes_to_follow = num_following_bytes(byte)
+            if num_bytes_to_follow == 0:  # Invalid start byte
                 return False
+        else:
+            if not is_continuation(byte):  # Invalid continuation byte
+                return False
+            num_bytes_to_follow -= 1
 
-        i += numOfBytes
-    return True
+    return num_bytes_to_follow == 0  # All bytes have been validated
