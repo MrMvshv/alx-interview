@@ -21,7 +21,7 @@ def island_perimeter(grid):
             else:
                 switch = 1
                 # print(f"found one at row {rowNo} and index {indexNo}\n")
-                if rowNo < (len(row) - 1):
+                if rowNo < (len(grid) - 1):
                     if (grid[rowNo + 1][indexNo] == 1):
                         # print("down one\n")
                         itemP -= 1
