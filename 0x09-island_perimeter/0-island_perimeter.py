@@ -6,6 +6,9 @@ described in grid
 
 
 def island_perimeter(grid):
+    """
+    finds island perimeter
+    """
     rowNo, indexNo = (0, 0,)
     totP, rowP, itemP = (0, 0, 4,)
     for row in grid:
