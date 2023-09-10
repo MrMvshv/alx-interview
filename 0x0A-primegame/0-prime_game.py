@@ -22,11 +22,10 @@ def is_prime(num):
     return True
 
 
-def calculate_winner(nums):
+def calculate_winner(n):
     """
-    calculate winner of prime game
+    Calculate the winner for a specific round with n numbers.
     """
-    n = max(nums)
     primes = [i for i in range(2, n + 1) if is_prime(i)]
     dp = [False] * (n + 1)
 
@@ -38,16 +37,22 @@ def calculate_winner(nums):
 
 def isWinner(x, nums):
     """
-    main function to return winner
+    Determine the winner of each round
+    and return the player with the most wins.
     """
-    winners = calculate_winner(nums)
     maria_wins = 0
     ben_wins = 0
 
-    for winner in winners:
-        if winner:
+    if x <= 0 or nums == []:
+        return None
+    if nums == [0]:
+        return None
+
+    for n in nums:
+        winners = calculate_winner(n)
+        if winners[n]:  # Maria's turn
             maria_wins += 1
-        else:
+        else:  # Ben's turn
             ben_wins += 1
 
     if maria_wins > ben_wins:
